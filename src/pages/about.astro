@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const stacks: { category: string; items: { name: string; iconClass: string }[] }[] = [
+  {
+    category: 'Frontend',
+    items: [
+      { name: 'HTML', iconClass: 'icon-[simple-icons--html5]' },
+      { name: 'CSS', iconClass: 'icon-[simple-icons--css]' },
+      { name: 'JavaScript', iconClass: 'icon-[simple-icons--javascript]' },
+      { name: 'TypeScript', iconClass: 'icon-[simple-icons--typescript]' },
+      { name: 'Astro.js', iconClass: 'icon-[simple-icons--astro]' },
+      { name: 'TailwindCSS', iconClass: 'icon-[simple-icons--tailwindcss]' },
+    ],
+  },
+  {
+    category: 'Serverless',
+    items: [{ name: 'Cloudflare Workers', iconClass: 'icon-[simple-icons--cloudflareworkers]' }],
+  },
+  {
+    category: 'Cloud Services',
+    items: [{ name: 'Cloudflare', iconClass: 'icon-[simple-icons--cloudflare]' }],
+  },
+  {
+    category: 'Source Management',
+    items: [
+      { name: 'Git', iconClass: 'icon-[simple-icons--git]' },
+      { name: 'GitHub', iconClass: 'icon-[simple-icons--github]' },
+    ],
+  },
+];
+const projects: {
+  name: string;
+  description: string;
+  url: string;
+  sourceUrl: string;
+  mainLang: { name: string; color: string };
+}[] = [
+  {
+    name: 'siro-3tsu-dev',
+    description: 'This website',
+    mainLang: { name: 'Astro.js', color: '#ff5a1f' },
+    url: 'https://siro.3tsu.dev',
+    sourceUrl: 'https://github.com/siro3tsu/siro-3tsu-dev',
+  },
+];
+---
+
+<Layout title="About me">
+  <h1 class="mb-2 text-3xl font-bold pl-2 pb-1 border-b-2 border-gray-900 dark:border-gray-100">About me</h1>
+  <div>
+    <h2 class="mb-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Stacks</h2>
+    <ul>
+      {
+        stacks.map((stack) => (
+          <li>
+            <h3 class="text-xl font-medium pl-2 my-2">{stack.category}</h3>
+            <ul class="flex flex-row gap-4">
+              {stack.items.map((item) => (
+                <li>
+                  <span class={`${item.iconClass} text-2xl align-middle mr-1`} />
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="mt-8">
+    <h2 class="mb-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Projects</h2>
+    <ul class="flex flex-row gap-4 flex-wrap">
+      {
+        projects.map((project) => (
+          <li class="border rounded-sm border-gray-900 dark:border-gray-100 pb-4 flex-1 min-w-62.5 max-w-100 p-4">
+            <h3 class="text-xl font-medium">{project.name}</h3>
+            <p class="text-gray-600 dark:text-gray-400">{project.description}</p>
+            <p class="text-sm mt-1">
+              <span
+                class="inline-block w-3 h-3 rounded-full mr-1"
+                style={`background-color: ${project.mainLang.color};`}
+              />
+              {project.mainLang.name}
+            </p>
+            <div class="flex gap-4 mt-2">
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-500 dark:text-blue-300 hover:underline"
+              >
+                <span class="icon-[material-symbols--open-in-new] align-middle" />
+                Visit
+              </a>
+              <a
+                href={project.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-500 dark:text-blue-300 hover:underline"
+              >
+                <span class="icon-[material-symbols--code] align-middle" />
+                Source Code
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>

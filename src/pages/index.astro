@@ -1,5 +1,86 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import avatarImg from '../images/avatar.png';
+
+const socialLinks: { name: string; userId: string; url: string; iconClass: string }[] = [
+  { name: 'GitHub', userId: 'siro3tsu', url: 'https://github.com/siro3tsu', iconClass: 'icon-[simple-icons--github]' },
+  { name: 'X', userId: '@siro3tsu', url: 'https://x.com/siro3tsu', iconClass: 'icon-[simple-icons--x]' },
+  {
+    name: 'Bluesky',
+    userId: '@siro.3tsu.dev',
+    url: 'https://bsky.app/profile/siro.3tsu.dev',
+    iconClass: 'icon-[simple-icons--bluesky]',
+  },
+  {
+    name: 'Discord',
+    userId: '@siro3tsu',
+    url: 'https://discord.com/users/1479706615652290794',
+    iconClass: 'icon-[simple-icons--discord]',
+  },
+  { name: 'Email', userId: '/email', url: '/email', iconClass: 'icon-[material-symbols--mail-rounded]' },
+];
 ---
 
-<Layout />
+<Layout>
+  <div class="flex flex-col md:flex-row gap-5">
+    <div class="flex flex-col gap-4 md:w-64">
+      <div class="flex flex-row md:flex-col gap-4">
+        <Image
+          src={avatarImg}
+          alt="しろみつのアバター"
+          width={256}
+          height={256}
+          class="rounded-full w-32 h-auto md:w-64 md:h-auto block"
+        />
+        <div class="flex flex-col gap-2">
+          <h1 class="text-3xl font-bold">しろみつ</h1>
+          <code>@siro3tsu</code>
+        </div>
+      </div>
+      <ul class="flex flex-col gap-4">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <span class="w-20 inline-block mr-4">
+                <span class={`${link.iconClass} text-xl align-middle mr-1`} />
+                {link.name}
+              </span>
+              {/https?:\/\//.test(link.url) ? (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full"
+                >
+                  {link.userId}
+                </a>
+              ) : (
+                <a href={link.url} class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full">
+                  {link.userId}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="md:flex-1">
+      <p>Webプログラミングが趣味の日本の高校生です。</p>
+      <p>現在はフロントエンドが得意ですが、バックエンドも習得していきたいです。</p>
+      <p>モットーは「無いものは自分でつくる」、生成AIに関しては支援用途のみの使用というポリシーがあります。</p>
+      <h2 class="my-2 text-xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Trivia</h2>
+      <ul class="list-disc pl-4">
+        <li>他の趣味：一次創作イラストの鑑賞、ボーカロイド曲やフリーBGMを聞くこと、ゲーム</li>
+        <li>遊んでいるゲーム：TerraTech、Cities: Skylines</li>
+        <li>好きな色：白、紫</li>
+      </ul>
+    </div>
+  </div>
+</Layout>
+<style>
+  @reference 'tailwindcss';
+  p {
+    @apply my-1;
+  }
+</style>

@@ -3,6 +3,8 @@ type Props = {
   title?: string;
 };
 import { siteConfig } from '../config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const { title } = Astro.props;
@@ -22,6 +24,10 @@ const { title } = Astro.props;
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
-    <slot />
+    <Header />
+    <main class="max-w-4xl w-dvw mx-auto px-4 xl:px-0">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

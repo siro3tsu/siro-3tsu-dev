@@ -18,9 +18,10 @@ all Rights Reserved:
     - `public/site.webmanifest`
 - Other non-code assets explicitly marked as "All Rights Reserved"
 
-These works may not be reproduced, modified, distributed, or otherwise
-used without permission from the respective copyright holder, except
-as permitted by applicable law.
+These works may not be reproduced, modified, distributed, used to train
+generative AI models, including base models and additional training
+models such as LoRA, or provided as input to or referenced by generative
+AI systems, without permission from the respective copyright holder.
 
 Third-party components and assets are subject to their respective
 licenses.

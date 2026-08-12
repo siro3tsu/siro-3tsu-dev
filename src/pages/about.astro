@@ -56,8 +56,8 @@ const projects: {
             <h3 class="text-xl font-medium pl-2 my-2">{stack.category}</h3>
             <ul class="flex flex-row gap-4 flex-wrap">
               {stack.items.map((item) => (
-                <li>
-                  <span class={`${item.iconClass} text-2xl align-middle mr-1`} />
+                <li class="flex flex-row items-center gap-1">
+                  <span class={`${item.iconClass} text-2xl`} />
                   {item.name}
                 </li>
               ))}
@@ -87,18 +87,18 @@ const projects: {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-blue-500 dark:text-blue-300 hover:underline"
+                class="text-blue-500 dark:text-blue-300 hover:underline flex flex-row items-center gap-1"
               >
-                <span class="icon-[material-symbols--open-in-new] align-middle" />
+                <span class="icon-[material-symbols--open-in-new]" />
                 Visit
               </a>
               <a
                 href={project.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-blue-500 dark:text-blue-300 hover:underline"
+                class="text-blue-500 dark:text-blue-300 hover:underline flex flex-row items-center gap-1"
               >
-                <span class="icon-[material-symbols--code] align-middle" />
+                <span class="icon-[material-symbols--code]" />
                 Source Code
               </a>
             </div>

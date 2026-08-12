@@ -1,0 +1,78 @@
+---
+
+---
+
+<button
+  popovertarget="theme-popover"
+  class="[anchor-name:--theme-popover] p-1 md:align-[-10px]"
+  aria-label="テーマ変更"
+>
+  <div class="text-2xl w-6 h-6">
+    <span class="mode-light icon-[material-symbols--light-mode-outline] hidden aria-selected:block"></span>
+    <span class="mode-dark icon-[material-symbols--dark-mode-outline] hidden aria-selected:block"></span>
+    <span class="mode-system-pc icon-[ic--baseline-computer] hidden aria-selected:block"></span>
+    <span class="mode-system-sp icon-[ic--baseline-smartphone] hidden aria-selected:block"></span>
+  </div>
+</button>
+<div
+  id="theme-popover"
+  popover
+  class="[position-anchor:--theme-popover] [position-area:bottom] mt-1 max-xl:mr-2 bg-purple-50/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-10"
+>
+  <ul class="flex flex-col gap-2">
+    <li>
+      <button value="light" type="button" class="theme-change-btn">
+        <span class="icon-[material-symbols--light-mode-outline]"></span>ライトモード
+      </button>
+    </li>
+    <li>
+      <button value="dark" type="button" class="theme-change-btn">
+        <span class="icon-[material-symbols--dark-mode-outline]"></span>ダークモード
+      </button>
+    </li>
+    <li>
+      <button value="system" type="button" class="theme-change-btn">
+        <span class="device-pc icon-[ic--baseline-computer] mr-1"></span>
+        <span class="device-sp icon-[ic--baseline-smartphone] mr-1"></span>
+        システム設定
+      </button>
+    </li>
+  </ul>
+</div>
+<script is:inline>
+  const changeTheme = (theme) => {
+    document
+      .querySelectorAll(`button[value="${theme}"], .mode-${theme}, .mode-${theme}-${deviceType}`)
+      .forEach((el) => el.setAttribute('aria-selected', 'true'));
+    if (theme === 'device') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  };
+
+  let deviceType;
+  if (window.matchMedia('(max-width: 768px) and (hover: none) and (pointer: coarse)').matches) {
+    document.querySelector('.device-pc').classList.add('hidden');
+    deviceType = 'sp';
+  } else {
+    document.querySelector('.device-sp').classList.add('hidden');
+    deviceType = 'pc';
+  }
+  changeTheme(localStorage.getItem('theme') || 'system');
+
+  const themePopover = document.querySelector('#theme-popover');
+  const themeButtons = themePopover.querySelectorAll('button');
+  themeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedTheme = button.value;
+      document
+        .querySelectorAll('button[aria-selected], [class^="mode-"][aria-selected]')
+        .forEach((el) => el.removeAttribute('aria-selected'));
+      changeTheme(selectedTheme);
+      localStorage.setItem('theme', selectedTheme);
+      themePopover.hidePopover();
+    });
+  });
+</script>

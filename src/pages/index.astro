@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import avatarImg from '../images/avatar.png';
 
-const socialLinks: { name: string; userId: string; url: string; iconClass: string }[] = [
+const socialLinks: { name: string; userId: string; url?: string; iconClass: string }[] = [
   { name: 'GitHub', userId: 'siro3tsu', url: 'https://github.com/siro3tsu', iconClass: 'icon-[simple-icons--github]' },
   { name: 'X', userId: '@siro3tsu', url: 'https://x.com/siro3tsu', iconClass: 'icon-[simple-icons--x]' },
   {
@@ -15,8 +15,12 @@ const socialLinks: { name: string; userId: string; url: string; iconClass: strin
   {
     name: 'Discord',
     userId: '@siro3tsu',
-    url: 'https://discord.com/users/1479706615652290794',
     iconClass: 'icon-[simple-icons--discord]',
+  },
+  {
+    name: 'Signal',
+    userId: 'siro.32',
+    iconClass: 'icon-[simple-icons--signal]',
   },
   { name: 'Email', userId: '/email', url: '/email', iconClass: 'icon-[material-symbols--mail-rounded]' },
 ];
@@ -46,19 +50,23 @@ const socialLinks: { name: string; userId: string; url: string; iconClass: strin
                 <span class={`${link.iconClass} text-xl align-middle mr-1`} />
                 {link.name}
               </span>
-              {/https?:\/\//.test(link.url) ? (
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full"
-                >
-                  {link.userId}
-                </a>
+              {link.url ? (
+                /https?:\/\//.test(link.url) ? (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full"
+                  >
+                    {link.userId}
+                  </a>
+                ) : (
+                  <a href={link.url} class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full">
+                    {link.userId}
+                  </a>
+                )
               ) : (
-                <a href={link.url} class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full">
-                  {link.userId}
-                </a>
+                <span class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full select-all">{link.userId}</span>
               )}
             </li>
           ))
@@ -68,13 +76,18 @@ const socialLinks: { name: string; userId: string; url: string; iconClass: strin
     <div class="md:flex-1">
       <p>Webプログラミングが趣味の日本の高校生です。</p>
       <p>現在はフロントエンドが得意ですが、バックエンドも習得していきたいです。</p>
-      <p>モットーは「無いものは自分でつくる」、生成AIに関しては支援用途のみの使用というポリシーがあります。</p>
+      <p>モットーは「無いものは自分でつくる」です。</p>
       <h2 class="my-2 text-xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Trivia</h2>
-      <ul class="list-disc pl-4">
+      <ul class="list-disc list-inside">
         <li>他の趣味：一次創作イラストの鑑賞、ボーカロイド曲やフリーBGMを聞くこと、ゲーム</li>
         <li>遊んでいるゲーム：TerraTech、Cities: Skylines</li>
         <li>好きな色：白、紫</li>
       </ul>
+      <h2 class="my-2 text-xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">
+        お問い合わせについて
+      </h2>
+      <p>ご連絡はXやBluesky、Discord、Signal、メールからどうぞ。</p>
+      <p>ご連絡の際は件名、お名前（ハンドルネーム可）、メッセージを記載してください。</p>
     </div>
   </div>
 </Layout>

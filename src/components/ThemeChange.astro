@@ -61,7 +61,7 @@
     deviceType = 'pc';
   }
   changeTheme(localStorage.getItem('theme') || 'system');
-
+  document.addEventListener('astro:after-swap', () => changeTheme(localStorage.getItem('theme') || 'system'));
   const themePopover = document.querySelector('#theme-popover');
   const themeButtons = themePopover.querySelectorAll('button');
   themeButtons.forEach((button) => {

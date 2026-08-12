@@ -3,6 +3,7 @@ type Props = {
   title?: string;
   useDefaultTitle?: boolean;
 };
+import { ClientRouter } from 'astro:transitions';
 import { siteConfig } from '../config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -23,6 +24,7 @@ const { title, useDefaultTitle = title !== undefined } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <title>{title === undefined ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`}</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <ClientRouter />
   </head>
   <body>
     <Header />

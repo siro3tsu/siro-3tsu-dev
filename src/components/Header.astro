@@ -9,7 +9,7 @@ import ThemeChange from './ThemeChange.astro';
   <div class="flex flex-row justify-between items-center">
     <a href="/" class="text-2xl font-bold">しろみつ's Website</a>
     <div class="flex flex-row gap-2">
-      <div class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2"><ThemeChange /></div>
+      <div class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2" transition:persist><ThemeChange /></div>
       <Hamburger />
     </div>
   </div>
@@ -19,13 +19,15 @@ import ThemeChange from './ThemeChange.astro';
     </ul>
   </nav>
   <script is:inline>
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('nav');
-    const lines = hamburger.querySelectorAll('span');
-    hamburger.addEventListener('click', () => {
-      navMenu.getAttribute('open') === null ? navMenu.setAttribute('open', '') : navMenu.removeAttribute('open');
-      lines.forEach((line) => {
-        line.getAttribute('open') === null ? line.setAttribute('open', '') : line.removeAttribute('open');
+    document.addEventListener('astro:page-load', () => {
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu = document.querySelector('nav');
+      const lines = hamburger.querySelectorAll('span');
+      hamburger.addEventListener('click', () => {
+        navMenu.getAttribute('open') === null ? navMenu.setAttribute('open', '') : navMenu.removeAttribute('open');
+        lines.forEach((line) => {
+          line.getAttribute('open') === null ? line.setAttribute('open', '') : line.removeAttribute('open');
+        });
       });
     });
   </script>

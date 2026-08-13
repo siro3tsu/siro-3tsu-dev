@@ -8,10 +8,10 @@
   aria-label="テーマ変更"
 >
   <div class="text-2xl w-6 h-6">
-    <span class="mode-light icon-[material-symbols--light-mode-outline] hidden aria-selected:block"></span>
-    <span class="mode-dark icon-[material-symbols--dark-mode-outline] hidden aria-selected:block"></span>
-    <span class="mode-system-pc icon-[ic--baseline-computer] hidden aria-selected:block"></span>
-    <span class="mode-system-sp icon-[ic--baseline-smartphone] hidden aria-selected:block"></span>
+    <span class="mode-light icon-[material-symbols--light-mode-outline] hidden aria-current:block"></span>
+    <span class="mode-dark icon-[material-symbols--dark-mode-outline] hidden aria-current:block"></span>
+    <span class="mode-system-pc icon-[ic--baseline-computer] hidden aria-current:block"></span>
+    <span class="mode-system-sp icon-[ic--baseline-smartphone] hidden aria-current:block"></span>
   </div>
 </button>
 <div
@@ -43,7 +43,7 @@
   const changeTheme = (theme) => {
     document
       .querySelectorAll(`button[value="${theme}"], .mode-${theme}, .mode-${theme}-${deviceType}`)
-      .forEach((el) => el.setAttribute('aria-selected', 'true'));
+      .forEach((el) => el.setAttribute('aria-current', 'true'));
     if (theme === 'system') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
@@ -66,12 +66,12 @@
   const themeButtons = themePopover.querySelectorAll('button');
   themeButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      const selectedTheme = button.value;
+      const currentTheme = button.value;
       document
-        .querySelectorAll('button[aria-selected], [class^="mode-"][aria-selected]')
-        .forEach((el) => el.removeAttribute('aria-selected'));
-      changeTheme(selectedTheme);
-      localStorage.setItem('theme', selectedTheme);
+        .querySelectorAll('button[aria-current], [class^="mode-"][aria-current]')
+        .forEach((el) => el.removeAttribute('aria-current'));
+      changeTheme(currentTheme);
+      localStorage.setItem('theme', currentTheme);
       themePopover.hidePopover();
     });
   });

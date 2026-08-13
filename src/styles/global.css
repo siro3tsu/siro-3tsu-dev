@@ -9,7 +9,7 @@ body {
 }
 
 .theme-change-btn {
-  @apply w-full rounded-md px-1 py-2 text-left aria-selected:bg-purple-300/70 dark:aria-selected:bg-indigo-700/70 hover:bg-purple-200/70 dark:hover:bg-indigo-800/70 hover:aria-selected:bg-purple-300/50 dark:hover:aria-selected:bg-indigo-700/90 flex flex-row items-center gap-1 cursor-pointer;
+  @apply w-full rounded-md px-1 py-2 text-left aria-current:bg-purple-300/70 dark:aria-current:bg-indigo-700/70 hover:bg-purple-200/70 dark:hover:bg-indigo-800/70 hover:aria-current:bg-purple-300/50 dark:hover:aria-current:bg-indigo-700/90 flex flex-row items-center gap-1 cursor-pointer;
 }
 
 @utility prose-black {

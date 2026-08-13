@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import CopyScript from '../components/CopyScript.astro';
 ---
 
 <Layout
@@ -12,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
     もちろん通常のメールサービスを利用してやり取りすることも可能です。
   </p>
   <p>
-    メールアドレス：<code>siro@3tsu.dev</code>
+    メールアドレス：<code data-copy="siro@3tsu.dev">siro@3tsu.dev</code>
   </p>
   <h2>Tuta Mailとは</h2>
   <p>
@@ -23,8 +24,9 @@ import Layout from '../layouts/Layout.astro';
     メールの送受信にTuta Mailを利用することで、しろみつとやり取りする際にエンドツーエンド暗号化が可能になります。<br />
     Tuta Mailは制限がありますが無料で利用できます。<br />
     <a href="https://tuta.com/" target="_blank" rel="noopener noreferrer" class="underline">Tuta 公式サイト</a
-    >から登録可能です。リンクが信用できない人は<code>Tuta</code>と検索してください。
+    >から登録可能です。リンクが信用できない人は<code data-copy="Tuta">Tuta</code>と検索してください。
   </p>
+  <CopyScript />
 </Layout>
 <style>
   @reference 'tailwindcss';
@@ -36,6 +38,6 @@ import Layout from '../layouts/Layout.astro';
     @apply my-1 leading-relaxed;
   }
   code {
-    @apply bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded select-all;
+    @apply bg-purple-200 dark:bg-indigo-900 p-1 mx-1 rounded cursor-pointer;
   }
 </style>

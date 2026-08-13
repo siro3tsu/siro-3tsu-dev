@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.baseUrl,
-  adapter: cloudflare(),
+  adapter: cloudflare({imageService: 'compile'}),
 
   vite: {
     plugins: [tailwindcss()]

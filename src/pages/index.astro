@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import avatarImg from '../images/avatar.png';
+import KeepAndroidOpen from '../components/KeepAndroidOpen.astro';
 
 const socialLinks: { name: string; userId: string; url?: string; iconClass: string }[] = [
   { name: 'GitHub', userId: 'siro3tsu', url: 'https://github.com/siro3tsu/', iconClass: 'icon-[simple-icons--github]' },
@@ -14,7 +15,7 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
   },
   {
     name: 'Discord',
-    userId: '@siro3tsu',
+    userId: 'siro3tsu',
     iconClass: 'icon-[simple-icons--discord]',
   },
   {
@@ -74,26 +75,40 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
       </ul>
     </div>
     <div class="md:flex-1">
+      <KeepAndroidOpen />
       <p>Webプログラミングが趣味の日本の高校生です。</p>
       <p>現在はフロントエンドが得意ですが、バックエンドも習得していきたいです。</p>
       <p>モットーは「無いものは自分でつくる」です。</p>
-      <h2 class="my-2 text-xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Trivia</h2>
+      <h2>Trivia</h2>
       <ul class="list-disc list-inside">
         <li>他の趣味：一次創作イラストの鑑賞、ボーカロイド曲やフリーBGMを聞くこと、ゲーム</li>
         <li>遊んでいるゲーム：TerraTech、Cities: Skylines</li>
-        <li>好きな色：白、紫</li>
+        <li>好きなOS：Windows、Linux、Android</li>
       </ul>
-      <h2 class="my-2 text-xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">
-        お問い合わせについて
-      </h2>
+      <h2>お問い合わせについて</h2>
       <p>ご連絡はXやBluesky、Discord、Signal、メールからどうぞ。</p>
       <p>ご連絡の際は件名、お名前（ハンドルネーム可）、メッセージを記載してください。</p>
+      <p class="font-bold text-red-500">
+        なお、営業やスパムは固くお断りします！！！これらの送受信のたびに地球温暖化が進行してしまいます！！！
+      </p>
+      <h3>安全な連絡手段をご希望の場合</h3>
+      <p>
+        Signalやメール(Tuta Mailでホスティングしています)をご利用ください。<br
+        />これらの連絡手段はエンドツーエンド暗号化されており第三者による傍受や改ざんが困難です。
+      </p>
     </div>
   </div>
 </Layout>
 <style>
   @reference 'tailwindcss';
+  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+  h2 {
+    @apply my-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100;
+  }
+  h3 {
+    @apply text-xl font-medium pl-2 my-2;
+  }
   p {
-    @apply my-1;
+    @apply my-1 leading-relaxed;
   }
 </style>

@@ -4,6 +4,7 @@ type Props = {
   useDefaultTitle?: boolean;
   description?: string;
   ogImage?: string;
+  blockIndexing?: boolean;
 };
 import { ClientRouter } from 'astro:transitions';
 import { siteConfig } from '../../site-config';
@@ -11,7 +12,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const { title, useDefaultTitle = title !== undefined, description, ogImage } = Astro.props;
+const { title, useDefaultTitle = title !== undefined, description, ogImage, blockIndexing } = Astro.props;
 const titleTemplate = title === undefined ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`;
 ---
 
@@ -46,7 +47,7 @@ const titleTemplate = title === undefined ? siteConfig.siteName : `${title} | ${
     <meta name="bingbot" content="noarchive" />
     <meta name="msnbot" content="noarchive" />
     <meta name="pinterest" content="nopin" />
-    <meta name="robots" content="noimageai, noai" />
+    <meta name="robots" content={`noimageai, noai${blockIndexing ? ', noindex' : ''}`} />
     <ClientRouter />
   </head>
   <body>

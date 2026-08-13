@@ -32,8 +32,8 @@
     </li>
     <li>
       <button value="system" type="button" class="theme-change-btn">
-        <span class="device-pc icon-[ic--baseline-computer] mr-1"></span>
-        <span class="device-sp icon-[ic--baseline-smartphone] mr-1"></span>
+        <span class="system-pc icon-[ic--baseline-computer] mr-1"></span>
+        <span class="system-sp icon-[ic--baseline-smartphone] mr-1"></span>
         システム設定
       </button>
     </li>
@@ -44,7 +44,7 @@
     document
       .querySelectorAll(`button[value="${theme}"], .mode-${theme}, .mode-${theme}-${deviceType}`)
       .forEach((el) => el.setAttribute('aria-selected', 'true'));
-    if (theme === 'device') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (theme === 'system') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
     } else if (theme === 'dark') {
@@ -54,10 +54,10 @@
 
   let deviceType;
   if (window.matchMedia('(max-width: 768px) and (hover: none) and (pointer: coarse)').matches) {
-    document.querySelector('.device-pc').classList.add('hidden');
+    document.querySelector('.system-pc').classList.add('hidden');
     deviceType = 'sp';
   } else {
-    document.querySelector('.device-sp').classList.add('hidden');
+    document.querySelector('.system-sp').classList.add('hidden');
     deviceType = 'pc';
   }
   changeTheme(localStorage.getItem('theme') || 'system');

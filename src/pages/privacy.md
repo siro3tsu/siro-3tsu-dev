@@ -1,6 +1,7 @@
 ---
 layout: ../layouts/LegalPage.astro
 title: プライバシーポリシー
+description: しろみつ's Siteのプライバシーポリシーです。
 ---
 
 ## 個人情報の利用目的

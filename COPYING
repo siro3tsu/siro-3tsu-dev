@@ -13,9 +13,8 @@ all Rights Reserved:
 - Logos, icons, and other branding materials
 - Files under:
   - `src/images/`
-  - `public/`, except for:
-    - `public/.assetsignore`
-    - `public/site.webmanifest`
+  - `public/`
+  - `resources/`
 - Other non-code assets explicitly marked as "All Rights Reserved"
 
 These works may not be reproduced, modified, distributed, used to train

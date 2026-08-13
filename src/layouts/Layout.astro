@@ -2,17 +2,20 @@
 type Props = {
   title?: string;
   useDefaultTitle?: boolean;
+  description?: string;
+  ogImage?: string;
 };
 import { ClientRouter } from 'astro:transitions';
-import { siteConfig } from '../config';
+import { siteConfig } from '../../site-config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const { title, useDefaultTitle = title !== undefined } = Astro.props;
+const { title, useDefaultTitle = title !== undefined, description, ogImage } = Astro.props;
+const titleTemplate = title === undefined ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`;
 ---
 
-<html lang="ja">
+<html lang="ja" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -22,8 +25,28 @@ const { title, useDefaultTitle = title !== undefined } = Astro.props;
     <meta name="apple-mobile-web-app-title" content="Shiromitsu's Website" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title === undefined ? siteConfig.siteName : `${title} | ${siteConfig.siteName}`}</title>
+    <title>{titleTemplate}</title>
+    <meta name="description" content={description || siteConfig.defaultDescription} />
+    <link rel="canonical" href={Astro.url.href} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={siteConfig.siteName} />
+    <meta property="og:title" content={titleTemplate} />
+    <meta property="og:type" content={Astro.url.pathname === '/' ? 'website' : 'article'} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={ogImage || siteConfig.defaultOgImage} />
+    <meta property="og:description" content={description || siteConfig.defaultDescription} />
+    {
+      siteConfig.xAccount && (
+        <>
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content={`@${siteConfig.xAccount}`} />
+        </>
+      )
+    }
+    <meta name="bingbot" content="noarchive" />
+    <meta name="msnbot" content="noarchive" />
+    <meta name="pinterest" content="nopin" />
+    <meta name="robots" content="noimageai, noai" />
     <ClientRouter />
   </head>
   <body>

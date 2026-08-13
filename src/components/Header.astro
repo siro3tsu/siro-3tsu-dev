@@ -3,17 +3,17 @@ import Hamburger from './Hamburger.astro';
 import ThemeChange from './ThemeChange.astro';
 ---
 
-<header
-  class="max-w-4xl w-dvw mx-auto p-4 md:pr-10 xl:pl-0 flex flex-col md:flex-row md:justify-between md:items-center gap-2 md:relative"
->
-  <div class="flex flex-row justify-between items-center">
-    <a href="/" class="text-2xl font-bold">しろみつ's Site</a>
-    <div class="flex flex-row gap-2">
-      <div class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2" transition:persist><ThemeChange /></div>
+<header class="max-w-4xl w-dvw mx-auto p-4 flex flex-col md:flex-row md:items-center gap-2">
+  <div class="flex flex-row justify-between items-center md:contents">
+    <a href="/" class="block text-2xl font-bold md:order-1 md:mr-auto">しろみつ's Site</a>
+    <div class="flex flex-row items-center gap-2 md:order-3">
+      <div transition:persist>
+        <ThemeChange />
+      </div>
       <Hamburger />
     </div>
   </div>
-  <nav class="overflow-hidden max-md:max-h-0 max-md:open:max-h-96 transition-[max-height] duration-300">
+  <nav class="md:order-2 overflow-hidden max-md:max-h-0 max-md:open:max-h-96 transition-[max-height] duration-300">
     <ul class="max-md:p-4 flex flex-row gap-4 max-md:border-y max-md:border-gray-500">
       <li><a href="/about/">About</a></li>
     </ul>

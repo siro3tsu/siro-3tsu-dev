@@ -2,22 +2,29 @@
 
 ---
 
-<button
-  popovertarget="theme-popover"
-  class="[anchor-name:--theme-popover] p-1 md:align-[-10px]"
-  aria-label="テーマ変更"
->
-  <div class="text-2xl w-6 h-6">
-    <span class="mode-light icon-[material-symbols--light-mode-outline] hidden aria-current:block"></span>
-    <span class="mode-dark icon-[material-symbols--dark-mode-outline] hidden aria-current:block"></span>
-    <span class="mode-system-pc icon-[ic--baseline-computer] hidden aria-current:block"></span>
-    <span class="mode-system-sp icon-[ic--baseline-smartphone] hidden aria-current:block"></span>
+<div class="relative hover:[&>div]:opacity-100">
+  <button
+    popovertarget="theme-popover"
+    class="[anchor-name:--theme-popover] p-1 md:align-[-10px]"
+    aria-label="テーマ変更"
+  >
+    <div class="text-2xl w-6 h-6">
+      <span class="mode-light icon-[material-symbols--light-mode-outline] hidden aria-current:block"></span>
+      <span class="mode-dark icon-[material-symbols--dark-mode-outline] hidden aria-current:block"></span>
+      <span class="mode-system-pc icon-[ic--baseline-computer] hidden aria-current:block"></span>
+      <span class="mode-system-sp icon-[ic--baseline-smartphone] hidden aria-current:block"></span>
+    </div>
+  </button>
+  <div
+    class="absolute opacity-0 transition-opacity top-10 -right-8 md:max-[940px]:-right-2 w-24 text-center bg-purple-50/70 dark:bg-gray-900/70 backdrop-blur-lg text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-10 pointer-events-none"
+  >
+    テーマ変更
   </div>
-</button>
+</div>
 <div
   id="theme-popover"
   popover
-  class="[position-anchor:--theme-popover] [position-area:bottom] mt-1 max-xl:mr-2 bg-purple-50/70 dark:bg-gray-900/70 backdrop-blur-lg text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-10"
+  class="[position-anchor:--theme-popover] [position-area:bottom] mt-1 mr-2 bg-purple-50/70 dark:bg-gray-900/70 backdrop-blur-lg text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-20"
 >
   <ul class="flex flex-col gap-2">
     <li>

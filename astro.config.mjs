@@ -14,5 +14,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap({filter: (page) => page !== 'https://siro.3tsu.dev/privacy/' && page !== 'https://siro.3tsu.dev/terms/'})],
+  integrations: [sitemap({filter: (page) => page !== 'https://siro.3tsu.dev/privacy/' && page !== 'https://siro.3tsu.dev/terms/' && page !== 'https://siro.3tsu.dev/email/'})],
 });

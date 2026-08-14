@@ -16,7 +16,6 @@
           navigator.clipboard.writeText(textToCopy).then(() => {
             const copyNotification = document.querySelector('.copy-notification');
             // はみ出さないようにする
-            const rect = el.getBoundingClientRect();
             if (e.pageX + copyNotification.offsetWidth > window.innerWidth) {
               copyNotification.style.left = `${window.innerWidth - copyNotification.offsetWidth - 10}px`;
             } else {

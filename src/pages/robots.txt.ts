@@ -37,6 +37,10 @@ Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 
 ${robotsTxt}
+User-agent: Grok
+User-agent: GrokBot
+Disallow: /
+
 Sitemap: ${sitemapURL.href}
 `;
 };

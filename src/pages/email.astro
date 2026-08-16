@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CopyScript from '../components/CopyScript.astro';
+import Layout from '@layouts/Layout.astro';
+import CopyScript from '@components/CopyScript.astro';
 ---
 
 <Layout
@@ -29,15 +29,8 @@ import CopyScript from '../components/CopyScript.astro';
   <CopyScript />
 </Layout>
 <style>
-  @reference 'tailwindcss';
-  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-  h2 {
-    @apply my-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100;
-  }
-  p {
-    @apply my-1 leading-relaxed;
-  }
+  @reference '../styles/global.css';
   code {
-    @apply bg-purple-200 dark:bg-indigo-900 p-1 mx-1 rounded cursor-pointer;
+    @apply chip;
   }
 </style>

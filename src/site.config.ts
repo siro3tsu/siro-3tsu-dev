@@ -11,3 +11,15 @@ export const siteConfig: {
   defaultDescription: 'しろみつの個人サイトです。プロフィールなどを掲載しています。',
   defaultOgImage: 'https://siro.3tsu.dev/og-image.png',
 };
+
+export const pathIgnoredFromSitemap = ['/privacy/', '/terms/', '/email/'];
+
+export const headerItems: {
+  label: string;
+  href: string;
+}[] = [
+  {
+    label: 'About',
+    href: '/about/',
+  },
+];

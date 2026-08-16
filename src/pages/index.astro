@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import avatarImg from '../images/avatar.png';
-import CopyScript from '../components/CopyScript.astro';
-import KeepAndroidOpen from '../components/KeepAndroidOpen.astro';
+import avatarImg from '@images/avatar.png';
+import CopyScript from '@components/CopyScript.astro';
+import KeepAndroidOpen from '@components/KeepAndroidOpen.astro';
 
 const socialLinks: { name: string; userId: string; url?: string; iconClass: string }[] = [
   { name: 'GitHub', userId: 'siro3tsu', url: 'https://github.com/siro3tsu/', iconClass: 'icon-[simple-icons--github]' },
@@ -40,12 +40,15 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
         <Image
           src={avatarImg}
           alt="しろみつのアバター"
-          width={208}
-          height={208}
+          widths={[128, 208, 256, 416]}
+          sizes="(min-width: 768px) 208px, 128px"
+          loading="eager"
+          decoding="sync"
+          fetchpriority="high"
           class="rounded-full w-32 h-auto md:w-52 md:h-auto block"
         />
         <div class="flex flex-col gap-2">
-          <h1 class="text-3xl font-bold">しろみつ</h1>
+          <h1 class="text-3xl font-bold border-b-0! p-0! m-0!">しろみつ</h1>
           <code>@siro3tsu</code>
         </div>
       </div>
@@ -59,24 +62,16 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
               </span>
               {link.url ? (
                 /https?:\/\//.test(link.url) ? (
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full"
-                  >
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" class="chip">
                     {link.userId}
                   </a>
                 ) : (
-                  <a href={link.url} class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full">
+                  <a href={link.url} class="chip">
                     {link.userId}
                   </a>
                 )
               ) : (
-                <span
-                  class="bg-purple-200 dark:bg-indigo-900 px-2 py-1 rounded-full max-w-38 overflow-hidden text-ellipsis cursor-pointer"
-                  data-copy={link.userId}
-                >
+                <span class="chip max-w-38 overflow-hidden text-ellipsis" data-copy={link.userId}>
                   {link.userId}
                 </span>
               )}
@@ -111,16 +106,3 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
     </div>
   </div>
 </Layout>
-<style>
-  @reference 'tailwindcss';
-  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-  h2 {
-    @apply my-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100;
-  }
-  h3 {
-    @apply text-xl font-medium pl-2 my-2;
-  }
-  p {
-    @apply my-1 leading-relaxed;
-  }
-</style>

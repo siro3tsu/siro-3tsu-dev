@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
 
 const stacks: { category: string; items: { name: string; iconClass: string }[] }[] = [
   {
@@ -48,12 +48,12 @@ const projects: {
 
 <Layout title="About me" description="しろみつの技術スタックやプロジェクトの紹介ページです。">
   <div>
-    <h2 class="mb-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Tech Stacks</h2>
+    <h2>Tech Stacks</h2>
     <ul>
       {
         stacks.map((stack) => (
           <li>
-            <h3 class="text-xl font-medium pl-2 my-2">{stack.category}</h3>
+            <h3>{stack.category}</h3>
             <ul class="flex flex-row gap-4 flex-wrap">
               {stack.items.map((item) => (
                 <li class="flex flex-row items-center gap-1">
@@ -67,13 +67,13 @@ const projects: {
       }
     </ul>
   </div>
-  <div class="mt-8">
-    <h2 class="mb-2 text-2xl font-semibold pl-2 pb-1 border-b border-gray-900 dark:border-gray-100">Projects</h2>
-    <ul class="flex flex-row gap-4 flex-wrap">
+  <div>
+    <h2>Projects</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
       {
         projects.map((project) => (
-          <li class="border rounded-sm border-gray-900 dark:border-gray-100 pb-4 flex-1 min-w-62.5 max-w-100 p-4">
-            <h3 class="text-xl font-medium">{project.name}</h3>
+          <li class="border rounded-sm border-gray-900 dark:border-gray-100 p-4">
+            <h3 class="text-xl font-medium p-0! m-0!">{project.name}</h3>
             <p class="text-gray-600 dark:text-gray-400">{project.description}</p>
             <p class="text-sm mt-1">
               <span

@@ -11,6 +11,26 @@
 "compilerOptions": {
     "types": [
         "./worker-configuration.d.ts"
-    ]
+    ],
+    "paths": {
+      "@core/*": [
+        "./src/core/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@images/*": [
+        "./src/images/*"
+      ],
+      "@site.config": [
+        "./src/site.config.ts"
+      ]
+    },
 }
 }

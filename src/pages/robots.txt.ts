@@ -36,9 +36,18 @@ User-Agent: *
 Content-Signal: ai-train=no, search=yes, ai-input=no
 Allow: /
 
+# Fetched from https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/main/robots.txt
+# at ${new Date().toUTCString()}
+
 ${robotsTxt}
+# Fetched Content End
+
 User-agent: Grok
 User-agent: GrokBot
+User-agent: xAI-Bot
+User-agent: xAI-Grok
+User-agent: Grok-DeepSearch
+User-agent: xAI-SearchBot
 Disallow: /
 
 Sitemap: ${sitemapURL.href}

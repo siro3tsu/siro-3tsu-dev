@@ -1,8 +1,8 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import avatarImg from '@images/avatar.png';
-import CopyScript from '@components/CopyScript.astro';
+import avatarImg from '@assets/img/avatar.png';
+import CopyTexts from '@components/CopyTexts.astro';
 import KeepAndroidOpen from '@components/KeepAndroidOpen.astro';
 
 const socialLinks: { name: string; userId: string; url?: string; iconClass: string }[] = [
@@ -29,7 +29,7 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
     userId: '05fa5d055317428f1809a00c96236efd8be3ecbbab7d726a933e1e05e8e0f7ec64',
     iconClass: 'icon-[simple-icons--session]',
   },
-  { name: 'Email', userId: '/email', url: '/email', iconClass: 'icon-[material-symbols--mail-rounded]' },
+  { name: 'Email', userId: '/email', url: '/email', iconClass: 'icon-[simple-icons--tuta]' },
 ];
 ---
 
@@ -79,7 +79,7 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
           ))
         }
       </ul>
-      <CopyScript />
+      <CopyTexts />
     </div>
     <div class="md:flex-1">
       <KeepAndroidOpen />

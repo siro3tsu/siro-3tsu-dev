@@ -12,8 +12,8 @@
       <div class="text-2xl w-6 h-6">
         <span class="mode-light icon-[material-symbols--light-mode-outline] hidden aria-current:block"></span>
         <span class="mode-dark icon-[material-symbols--dark-mode-outline] hidden aria-current:block"></span>
-        <span class="mode-system-pc icon-[ic--baseline-computer] hidden aria-current:block"></span>
-        <span class="mode-system-sp icon-[ic--baseline-smartphone] hidden aria-current:block"></span>
+        <span class="mode-system-pc icon-[mdi--computer] hidden aria-current:block"></span>
+        <span class="mode-system-sp icon-[mdi--smartphone] hidden aria-current:block"></span>
       </div>
     </button>
     <div
@@ -40,8 +40,8 @@
       </li>
       <li>
         <button value="system" type="button" class="theme-change-btn">
-          <span class="system-pc icon-[ic--baseline-computer] mr-1"></span>
-          <span class="system-sp icon-[ic--baseline-smartphone] mr-1"></span>
+          <span class="system-pc icon-[mdi--computer] mr-1"></span>
+          <span class="system-sp icon-[mdi--smartphone] mr-1"></span>
           システム設定
         </button>
       </li>
@@ -63,9 +63,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
     }
     window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => {
-        root.classList.remove('[&_*]:!transition-none');
-      });
+      root.classList.remove('[&_*]:!transition-none');
     });
   };
 
@@ -94,7 +92,7 @@
   });
 </script>
 <style>
-  @reference '../styles/global.css';
+  @reference '@styles/global.css';
   .theme-change-btn {
     @apply w-full rounded-md px-1 py-2 text-left aria-current:bg-primary-300/70 dark:aria-current:bg-primary-700/70 hover:bg-primary-200/70 dark:hover:bg-primary-800/70 hover:aria-current:bg-primary-300/50 dark:hover:aria-current:bg-primary-700/90 flex flex-row items-center gap-1 cursor-pointer;
   }

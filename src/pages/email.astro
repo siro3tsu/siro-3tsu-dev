@@ -1,6 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import CopyScript from '@components/CopyScript.astro';
+import CopyTexts from '@components/CopyTexts.astro';
 ---
 
 <Layout
@@ -26,11 +26,13 @@ import CopyScript from '@components/CopyScript.astro';
     <a href="https://tuta.com/" target="_blank" rel="noopener noreferrer" class="underline">Tuta 公式サイト</a
     >から登録可能です。リンクが信用できない人は<code data-copy="Tuta">Tuta</code>と検索してください。
   </p>
-  <CopyScript />
+  <CopyTexts />
 </Layout>
 <style>
-  @reference '../styles/global.css';
+  @reference '@styles/global.css';
   code {
-    @apply chip;
+    @apply bg-primary-200 dark:bg-primary-900 p-1 mx-1 rounded not-data-copy:before:content-none after:content-none;
+    @apply data-copy:cursor-pointer data-copy:before:icon-[mdi--content-copy];
+    @apply data-copy:before:mr-1 data-copy:before:text-lg data-copy:before:align-middle data-copy:hover:bg-primary-300 data-copy:hover:dark:bg-primary-700;
   }
 </style>

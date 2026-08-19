@@ -22,4 +22,8 @@ export const headerItems: {
     label: 'About',
     href: '/about/',
   },
+  {
+    label: 'Blog',
+    href: 'https://blog.siro.3tsu.dev/',
+  },
 ];

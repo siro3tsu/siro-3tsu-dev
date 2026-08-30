@@ -4,7 +4,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title} useDefaultTitle={false} description={frontmatter.description} blockIndexing={true}>
-  <article class="prose prose-black prose-blue dark:prose-invert max-w-none">
+  <article class="prose prose-black prose-blue dark:prose-invert max-w-none prose-headings:scroll-mt-20">
     <h1>{frontmatter.title}</h1>
     <slot />
   </article>

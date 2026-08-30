@@ -29,19 +29,29 @@ const stacks: { category: string; items: { name: string; iconClass: string }[] }
     ],
   },
 ];
+const langsColor: { [key: string]: string } = {
+  'Astro.js': '#ff5a03',
+};
 const projects: {
   name: string;
   description: string;
   url: string;
   sourceUrl: string;
-  mainLang: { name: string; color: string };
+  mainLang: string;
 }[] = [
   {
     name: 'siro-3tsu-dev',
     description: 'This website',
-    mainLang: { name: 'Astro.js', color: '#ff5a1f' },
-    url: 'https://siro.3tsu.dev',
-    sourceUrl: 'https://github.com/siro3tsu/siro-3tsu-dev',
+    mainLang: 'Astro.js',
+    url: 'https://siro.3tsu.dev/',
+    sourceUrl: 'https://github.com/siro3tsu/siro-3tsu-dev/',
+  },
+  {
+    name: 'blog-siro-3tsu-dev',
+    description: 'My blog website',
+    mainLang: 'Astro.js',
+    url: 'https://blog.siro.3tsu.dev/',
+    sourceUrl: 'https://github.com/siro3tsu/blog-siro-3tsu-dev/',
   },
 ];
 ---
@@ -78,9 +88,9 @@ const projects: {
             <p class="text-sm mt-1">
               <span
                 class="inline-block w-3 h-3 rounded-full mr-1"
-                style={`background-color: ${project.mainLang.color};`}
+                style={`background-color: ${langsColor[project.mainLang]};`}
               />
-              {project.mainLang.name}
+              {project.mainLang}
             </p>
             <div class="flex gap-4 mt-2">
               <a

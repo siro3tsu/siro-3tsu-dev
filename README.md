@@ -1,43 +1,72 @@
-# Astro Starter Kit: Minimal
+# siro-3tsu-dev
 
-```sh
-npm create astro@latest -- --template minimal
+しろみつのプロフィールサイトのソースコードを置いているリポジトリです。  
+SSGであるAstro.jsをベースに、TailwindCSSでスタイル付けを行い、最終的にCloudflare Workersへデプロイされます。
+
+## 主要な技術構成
+
+- Astro.js
+- Tailwindcss
+- TypeScript
+- ESLint
+- Prettier
+- Cloudflare Workers
+- GitHub Actions
+
+## セットアップ
+
+当プロジェクトはWindows環境においてNVM for Windows経由でインストールされたNode.js v26.7.0で開発されています。
+
+```bash
+# 依存関係のインストール
+pnpm install
+
+# 開発サーバーの起動 | localhost:4321 で起動します。
+# 万一ポートが使用済みの場合は一時的にポート番号が変更されて起動します。
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### コマンド類
 
-## 🚀 Project Structure
+| コマンド        | Action                                                                      |
+| --------------- | --------------------------------------------------------------------------- |
+| `pnpm dev`      | 開発サーバーを`localhost:4321`で起動します                                  |
+| `pnpm build`    | `./dist/`へビルドします                                                     |
+| `pnpm preview`  | `./dist/`へビルドを行い、プレビューサーバーを`localhost:4321`で起動します。 |
+| `pnpm lint`     | ESLint による静的解析                                                       |
+| `pnpm lint:fix` | ESLint による自動修正                                                       |
+| `pnpm format`   | Prettier によるフォーマット                                                 |
 
-Inside of your Astro project, you'll see the following folders and files:
+## プロジェクト構造(概要)
 
 ```text
 /
-├── public/
+├── posts/                    # Git Submodules を利用して配置されたブログ記事
+├── public/                   # favicon などの静的アセット（Astro.js の処理対象外）
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/img/           # Astro.js によって処理される画像アセット
+│   ├── components/           # 再使用可能な Astro.js/React コンポーネント
+│   ├── core/                 # 再使用可能なスクリプト群
+│   ├── layouts/              # レイアウト
+│   ├── pages/                # ルーティング対象ディレクトリ
+│   ├── styles/               # Tailwindcss スタイルシート
+│   └── site.config.ts        # サイトの設定定数定義
+├── astro.config.mjs          # Astro.js の設定
+├── package.json              # スクリプト及び依存関係
+└── wrangler.jsonc            # Cloudflare Workers の設定
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 開発ルール
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- ESLintを通す前にPrettierでフォーマットを行う。
+- コミット前に必ずESLintを通し、エラーや警告が出ない場合のみコミットを行う。
 
-Any static assets, like images, can be placed in the `public/` directory.
+## ライセンス
 
-## 🧞 Commands
+当リポジトリのソースコードは、特に記載がない限り、[GNU Affero General Public License v3.0 only](./LICENSE)のもとで提供しています。
 
-All commands are run from the root of the project, from a terminal:
+オリジナルのテキスト、画像、イラスト、写真などのコンテンツは上記のライセンス対象外となり、特に記載がない限り、全著作権保有となっています。無断転載・複製・改変・配布等の行為を禁止します。ただし、[Copyright Notice](./COPYING)に定める通り、生成AIのモデル学習への利用や生成AIにコンテンツを参照させること等の禁止行為に該当する場合を除き、著作権法やその他の法令により認められる利用（適法な引用等）を妨げるものではありません。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+ウェブサイトやソフトウェアの画面等のスクリーンショット、ロゴ、商標、引用部分その他の第三者に権利が帰属するコンテンツについては、本ブログからライセンスを付与するものではなく、それぞれの著作権者のライセンスおよび利用条件に従います。
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+詳細な著作権およびライセンスに関する規定については、[Copyright Notice](./COPYING) を参照してください。

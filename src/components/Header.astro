@@ -4,17 +4,28 @@ import ThemeChange from '@components/ThemeChange.astro';
 import { siteConfig, headerItems } from '@site.config';
 ---
 
-<header class="pb-4 flex flex-col sm:flex-row sm:items-center sm:gap-2">
-  <div class="flex flex-row justify-between items-center sm:contents">
-    <a href="/" class="block text-2xl font-bold sm:order-1 sm:mr-auto">{siteConfig.siteName}</a>
-    <div class="flex flex-row items-center gap-2 sm:order-3">
-      <ThemeChange />
-      <Hamburger />
+<header class="sticky top-0 z-40 max-w-4xl w-full mx-auto p-1 transition-transform duration-300">
+  <div class="absolute top-0 left-1 w-[calc(100%-0.5rem)] h-3 -z-20 backdrop-blur-sm"></div>
+  <div
+    class="p-4 w-full flex flex-col sm:flex-row sm:items-center sm:gap-2 transition-bg duration-initial bg-default-bg dark:bg-default-bg-dark rounded-lg border border-gray-500"
+  >
+    <div class="flex flex-row justify-between items-center sm:contents">
+      <a href="/" class="block text-2xl font-bold sm:order-1 sm:mr-auto">{siteConfig.siteName}</a>
+      <div class="flex flex-row items-center gap-2 sm:order-3">
+        <ThemeChange />
+        <Hamburger />
+      </div>
     </div>
-  </div>
-  <div class="sm:order-2 overflow-hidden max-sm:max-h-0 max-sm:in-open:max-h-96 transition-[max-height] duration-300">
-    <nav class="max-sm:mt-2">
-      <ul class="max-sm:p-4 flex flex-row gap-4 max-sm:border-y max-sm:border-gray-500">
+    <div
+      class="sm:hidden absolute bottom-1 left-1 w-[calc(100%-0.5rem)] h-5 -z-20 backdrop-blur-sm in-open:translate-y-3 transition-transform duration-300"
+    >
+    </div>
+    <nav
+      class="sm:order-2 max-sm:fixed top-3 left-0 max-sm:-z-10 max-sm:px-1 max-sm:w-dvw max-sm:in-open:translate-y-[105%] transition-transform duration-300 sm:pb-1"
+    >
+      <ul
+        class="max-sm:p-4 flex flex-row gap-4 max-sm:border max-sm:rounded-lg max-sm:border-gray-500 max-sm:bg-default-bg max-sm:dark:bg-default-bg-dark transition-bg duration-initial"
+      >
         {
           headerItems.map((item) => (
             <li>
@@ -30,8 +41,45 @@ import { siteConfig, headerItems } from '@site.config';
       const hamburger = document.querySelector('.hamburger');
       const header = document.querySelector('header');
       hamburger.addEventListener('click', () => {
-        header.hasAttribute('open') ? header.removeAttribute('open') : header.setAttribute('open', '');
+        if (header.hasAttribute('open')) {
+          header.removeAttribute('open');
+        } else {
+          header.setAttribute('open', '');
+        }
       });
+      let lastScrollTop = 0;
+      let ticking = false; // 描画待ちフラグ
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          // すでに描画待ち（処理が予約されている）状態なら、何もしない
+          if (!ticking) {
+            // 次の描画タイミングで実行するようブラウザに予約
+            window.requestAnimationFrame(() => {
+              const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+              if (currentScrollTop < 0) {
+                ticking = false;
+                return;
+              }
+
+              if (currentScrollTop > lastScrollTop) {
+                header.classList.add('translate-y-[-110%]');
+                header.removeAttribute('open');
+              } else {
+                header.classList.remove('translate-y-[-110%]');
+              }
+
+              lastScrollTop = currentScrollTop;
+              ticking = false; // 処理が終わったのでフラグを戻す
+            });
+
+            ticking = true; // 予約済みにする
+          }
+        },
+        { passive: true }
+      );
     });
   </script>
 </header>

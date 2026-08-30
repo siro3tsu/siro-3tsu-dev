@@ -5,8 +5,8 @@
 <div class="theme-change-component" transition:persist>
   <div class="relative hover:[&>div]:opacity-100">
     <button
-      popovertarget="theme-popover"
-      class="[anchor-name:--theme-popover] p-1 align-middle cursor-pointer"
+      id="theme-button"
+      class="[anchor-name:--theme-dialog] p-1 align-middle cursor-pointer"
       aria-label="テーマ変更"
     >
       <div class="text-2xl w-6 h-6">
@@ -17,36 +17,35 @@
       </div>
     </button>
     <div
-      class="absolute opacity-0 transition-opacity top-10 -right-8 sm:max-[940px]:-right-2 w-24 text-center bg-default-bg/70 dark:bg-default-bg-dark/70 backdrop-blur-xs text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-10 pointer-events-none"
+      class="absolute opacity-0 transition-opacity top-10 -right-8 sm:max-[940px]:-right-2 w-24 text-center bg-default-bg/70 dark:bg-default-bg-dark/70 backdrop-blur-xs text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-50 pointer-events-none"
     >
       テーマ変更
     </div>
   </div>
-  <div
-    id="theme-popover"
-    popover
-    class="[position-anchor:--theme-popover] [position-area:bottom] mt-1 mr-2 bg-default-bg/70 dark:bg-default-bg-dark/70 backdrop-blur-xs text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg p-1 z-20"
+  <dialog
+    id="theme-dialog"
+    class="[position-anchor:--theme-dialog] [position-area:bottom] mt-1 mr-2 bg-default-bg/70 dark:bg-default-bg-dark/70 backdrop-blur-xs text-gray-900 dark:text-gray-100 border border-gray-500 rounded-md shadow-lg backdrop:bg-transparent"
   >
-    <ul class="flex flex-col gap-2">
+    <ul class="p-1 flex flex-col gap-1">
       <li>
         <button value="light" type="button" class="theme-change-btn">
-          <span class="icon-[material-symbols--light-mode-outline]"></span>ライトモード
+          <span class="icon-[material-symbols--light-mode-outline] text-lg"></span>ライトモード
         </button>
       </li>
       <li>
         <button value="dark" type="button" class="theme-change-btn">
-          <span class="icon-[material-symbols--dark-mode-outline]"></span>ダークモード
+          <span class="icon-[material-symbols--dark-mode-outline] text-lg"></span>ダークモード
         </button>
       </li>
       <li>
         <button value="system" type="button" class="theme-change-btn">
-          <span class="system-pc icon-[mdi--computer] mr-1"></span>
-          <span class="system-sp icon-[mdi--smartphone] mr-1"></span>
+          <span class="system-pc icon-[mdi--computer] text-lg"></span>
+          <span class="system-sp icon-[mdi--smartphone] text-lg"></span>
           システム設定
         </button>
       </li>
     </ul>
-  </div>
+  </dialog>
 </div>
 <script is:inline>
   const themeChangeComponent = document.querySelector('.theme-change-component');
@@ -55,16 +54,16 @@
       .querySelectorAll(`button[value="${theme}"], .mode-${theme}, .mode-${theme}-${deviceType}`)
       .forEach((el) => el.setAttribute('aria-current', 'true'));
     const root = document.documentElement;
-    root.classList.add('[&_*]:!transition-none');
+    root.classList.add('[&_*:not(header):not(header_*)]:!transition-none');
+    window.requestAnimationFrame(() => {
+      root.classList.remove('[&_*:not(header):not(header_*)]:!transition-none');
+    });
     if (theme === 'system') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     if (theme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
     } else if (theme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
-    window.requestAnimationFrame(() => {
-      root.classList.remove('[&_*]:!transition-none');
-    });
   };
 
   let deviceType;
@@ -77,8 +76,25 @@
   }
   changeTheme(localStorage.getItem('theme') || 'system');
   document.addEventListener('astro:after-swap', () => changeTheme(localStorage.getItem('theme') || 'system'));
-  const themePopover = document.querySelector('#theme-popover');
-  const themeButtons = themePopover.querySelectorAll('button');
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme') {
+      themeChangeComponent
+        .querySelectorAll('button[aria-current], [class^="mode-"][aria-current]')
+        .forEach((el) => el.removeAttribute('aria-current'));
+      changeTheme(e.newValue || 'system');
+    }
+  });
+  const themeDialog = document.querySelector('#theme-dialog');
+  const themeButton = document.querySelector('#theme-button');
+  const themeButtons = themeDialog.querySelectorAll('button');
+  themeButton.addEventListener('click', () => {
+    themeDialog.showModal();
+  });
+  themeDialog.addEventListener('click', (e) => {
+    if (e.target === themeDialog) {
+      themeDialog.close();
+    }
+  });
   themeButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const currentTheme = button.value;
@@ -87,7 +103,7 @@
         .forEach((el) => el.removeAttribute('aria-current'));
       changeTheme(currentTheme);
       localStorage.setItem('theme', currentTheme);
-      themePopover.hidePopover();
+      themeDialog.close();
     });
   });
 </script>

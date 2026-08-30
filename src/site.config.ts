@@ -3,13 +3,13 @@ export const siteConfig: {
   siteName: string;
   xAccount?: string;
   defaultDescription: string;
-  defaultOgImage: string;
+  defaultOgImagePath: string;
 } = {
   baseUrl: 'https://siro.3tsu.dev',
   siteName: "しろみつ's Site",
   xAccount: 'siro3tsu',
   defaultDescription: 'しろみつの個人サイトです。プロフィールなどを掲載しています。',
-  defaultOgImage: 'https://siro.3tsu.dev/og-image.png',
+  defaultOgImagePath: '/og-image.png',
 };
 
 export const pathIgnoredFromSitemap = ['/privacy/', '/terms/', '/email/'];

@@ -3,7 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import avatarImg from '@assets/img/avatar.png';
 import CopyTexts from '@components/CopyTexts.astro';
-import KeepAndroidOpen from '@components/KeepAndroidOpen.astro';
+import NotifyBanner from '@components/NotifyBanner.astro';
 
 const socialLinks: { name: string; userId: string; url?: string; iconClass: string }[] = [
   { name: 'GitHub', userId: 'siro3tsu', url: 'https://github.com/siro3tsu/', iconClass: 'icon-[simple-icons--github]' },
@@ -82,7 +82,18 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
       <CopyTexts />
     </div>
     <div class="md:flex-1">
-      <KeepAndroidOpen />
+      <NotifyBanner bannerId="about-email-trouble-202609" theme="yellow" closeable={true}>
+        2026/09/02夕方~09/03午前にかけて、メールサービスのサブスクの更新にトラブルが発生したため、メールが正常に受信できていなかった可能性があります。詳しくは<a
+          href="/email/"
+          class="underline">メールページ</a
+        >をご覧ください。
+      </NotifyBanner>
+      <NotifyBanner bannerId="keep-android-open" theme="red" closeable={false}>
+        <a href="https://keepandroidopen.org/ja/" target="_blank" rel="noopener noreferrer" class="hover:underline"
+          >AndroidがクローズドなOSになろうとしています!!!<span class="icon-[mdi--open-in-new] align-middle ml-1"
+          ></span></a
+        >
+      </NotifyBanner>
       <p>Webプログラミングが趣味の日本の高校生です。</p>
       <p>現在はフロントエンドが得意ですが、バックエンドも習得していきたいです。</p>
       <p>モットーは「無いものは自分でつくる」です。</p>

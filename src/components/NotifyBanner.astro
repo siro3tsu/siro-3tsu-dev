@@ -1,0 +1,49 @@
+---
+type Props = {
+  bannerId: string;
+  theme: keyof typeof themeClasses;
+  closeable?: boolean;
+};
+const { bannerId, theme, closeable } = Astro.props;
+
+const themeClasses = {
+  red: 'bg-red-700 text-white border-red-900 dark:border-red-100',
+  blue: 'bg-blue-700 text-white border-blue-900 dark:border-blue-100',
+  green: 'bg-green-700 text-white border-green-900 dark:border-green-100',
+  yellow: 'bg-yellow-800 text-white border-yellow-900 dark:border-yellow-100',
+};
+---
+
+<notify-banner data-banner-id={bannerId}>
+  <div
+    class={`${themeClasses[theme] || themeClasses.red} text-lg font-bold px-4 py-2 rounded-md text-center border-2 mb-2 flex flex-row items-center justify-center gap-2`}
+  >
+    <div><slot /></div>
+
+    {
+      closeable && (
+        <button class="font-bold cursor-pointer block" aria-label="閉じる">
+          <span class="icon-[mdi--close] text-lg align-middle" />
+        </button>
+      )
+    }
+  </div>
+</notify-banner>
+<script>
+  class NotifyBanner extends HTMLElement {
+    connectedCallback() {
+      const bannerId = this.dataset.bannerId;
+      if (localStorage.getItem(`notifyBannerClosed_${bannerId}`) === 'true') {
+        this.style.display = 'none';
+      }
+      const button = this.querySelector('button');
+      if (button) {
+        button.addEventListener('click', () => {
+          this.style.display = 'none';
+          localStorage.setItem(`notifyBannerClosed_${bannerId}`, 'true');
+        });
+      }
+    }
+  }
+  customElements.define('notify-banner', NotifyBanner);
+</script>

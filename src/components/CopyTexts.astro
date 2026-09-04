@@ -22,7 +22,6 @@
             } else {
               copyNotification.style.left = `${e.pageX}px`;
             }
-            console.log(e.pageY, copyNotification.offsetHeight, window.innerHeight);
             if (e.pageY + copyNotification.offsetHeight > window.scrollY + window.innerHeight) {
               copyNotification.style.top = `${window.scrollY + window.innerHeight - copyNotification.offsetHeight - 10}px`;
             } else {

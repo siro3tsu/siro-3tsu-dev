@@ -16,7 +16,7 @@ const themeClasses = {
 
 <notify-banner data-banner-id={bannerId}>
   <div
-    class={`${themeClasses[theme] || themeClasses.red} text-lg font-bold px-4 py-2 rounded-md text-center border-2 mb-2 flex flex-row items-center justify-center gap-2`}
+    class={`${themeClasses[theme] || themeClasses.red} text-lg font-bold px-4 py-2 rounded-md text-center border-2 mb-2 flex flex-row items-start justify-center gap-1`}
   >
     <div><slot /></div>
 
@@ -29,21 +29,3 @@ const themeClasses = {
     }
   </div>
 </notify-banner>
-<script>
-  class NotifyBanner extends HTMLElement {
-    connectedCallback() {
-      const bannerId = this.dataset.bannerId;
-      if (localStorage.getItem(`notifyBannerClosed_${bannerId}`) === 'true') {
-        this.style.display = 'none';
-      }
-      const button = this.querySelector('button');
-      if (button) {
-        button.addEventListener('click', () => {
-          this.style.display = 'none';
-          localStorage.setItem(`notifyBannerClosed_${bannerId}`, 'true');
-        });
-      }
-    }
-  }
-  customElements.define('notify-banner', NotifyBanner);
-</script>

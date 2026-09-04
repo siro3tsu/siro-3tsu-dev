@@ -1,0 +1,22 @@
+---
+
+---
+
+<script is:inline>
+  class NotifyBanner extends HTMLElement {
+    connectedCallback() {
+      const bannerId = this.dataset.bannerId;
+      if (localStorage.getItem(`notifyBannerClosed_${bannerId}`) === 'true') {
+        this.style.display = 'none';
+      }
+      const button = this.querySelector('button');
+      if (button) {
+        button.addEventListener('click', () => {
+          this.style.display = 'none';
+          localStorage.setItem(`notifyBannerClosed_${bannerId}`, 'true');
+        });
+      }
+    }
+  }
+  customElements.define('notify-banner', NotifyBanner);
+</script>

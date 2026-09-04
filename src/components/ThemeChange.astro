@@ -45,24 +45,7 @@
 </div>
 <script is:inline>
   const themeChangeComponent = document.querySelector('.theme-change-component');
-  const changeTheme = (theme) => {
-    themeChangeComponent
-      .querySelectorAll(`button[value="${theme}"], .mode-${theme}, .mode-${theme}-${deviceType}`)
-      .forEach((el) => el.setAttribute('aria-current', 'true'));
-    const root = document.documentElement;
-    root.classList.add('[&_*:not(header):not(header_*)]:!transition-none');
-    window.requestAnimationFrame(() => {
-      root.classList.remove('[&_*:not(header):not(header_*)]:!transition-none');
-    });
-    if (theme === 'system') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    if (theme === 'light') {
-      document.documentElement.dataset.theme = 'light';
-    } else if (theme === 'dark') {
-      document.documentElement.dataset.theme = 'dark';
-    }
-  };
-
-  let deviceType;
+  let deviceType = 'pc';
   // switch system icon based on device type (PC or SP)
   if (window.matchMedia('(max-width: 768px) and (hover: none) and (pointer: coarse)').matches) {
     themeChangeComponent.querySelector('.system-pc').classList.add('hidden');
@@ -77,19 +60,48 @@
   themeChangeComponent
     .querySelectorAll(`button[value="${initialTheme}"], .mode-${initialTheme}, .mode-${initialTheme}-${deviceType}`)
     .forEach((el) => el.setAttribute('aria-current', 'true'));
+</script>
+<script>
+  const themeChangeComponent = document.querySelector('.theme-change-component') as HTMLElement;
+  const changeTheme = (theme: 'light' | 'dark' | 'system') => {
+    themeChangeComponent
+      .querySelectorAll(`button[value="${theme}"], .mode-${theme}, .mode-${theme}-${deviceType}`)
+      .forEach((el) => el.setAttribute('aria-current', 'true'));
+    const root = document.documentElement;
+    root.classList.add('[&_*:not(header):not(header_*)]:transition-none!');
+    window.requestAnimationFrame(() => {
+      root.classList.remove('[&_*:not(header):not(header_*)]:transition-none!');
+    });
+    if (theme === 'system') theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (theme === 'light') {
+      document.documentElement.dataset.theme = 'light';
+    } else if (theme === 'dark') {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  };
+
+  let deviceType: 'pc' | 'sp' = 'pc';
+  // switch system icon based on device type (PC or SP)
+  if (window.matchMedia('(max-width: 768px) and (hover: none) and (pointer: coarse)').matches) {
+    deviceType = 'sp';
+  } else {
+    deviceType = 'pc';
+  }
 
   // apply theme before view transition complete to avoid flickering
-  document.addEventListener('astro:after-swap', () => changeTheme(localStorage.getItem('theme') || 'system'));
+  document.addEventListener('astro:after-swap', () =>
+    changeTheme((localStorage.getItem('theme') as 'light' | 'dark' | 'system') || 'system')
+  );
   window.addEventListener('storage', (e) => {
     if (e.key === 'theme') {
       themeChangeComponent
         .querySelectorAll('button[aria-current], [class^="mode-"][aria-current]')
         .forEach((el) => el.removeAttribute('aria-current'));
-      changeTheme(e.newValue || 'system');
+      changeTheme((e.newValue as 'light' | 'dark' | 'system') || 'system');
     }
   });
-  const themeDialog = document.querySelector('#theme-dialog');
-  const themeButton = document.querySelector('#theme-button');
+  const themeDialog = document.querySelector('#theme-dialog') as HTMLDialogElement;
+  const themeButton = document.querySelector('#theme-button') as HTMLButtonElement;
   const themeButtons = themeDialog.querySelectorAll('button');
   themeButton.addEventListener('click', () => {
     themeDialog.showModal();
@@ -101,7 +113,7 @@
   });
   themeButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      const currentTheme = button.value;
+      const currentTheme = button.value as 'light' | 'dark' | 'system';
       themeChangeComponent
         .querySelectorAll('button[aria-current], [class^="mode-"][aria-current]')
         .forEach((el) => el.removeAttribute('aria-current'));

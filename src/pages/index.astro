@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import avatarImg from '@assets/img/avatar.png';
 import CopyTexts from '@components/CopyTexts.astro';
 import NotifyBanner from '@components/NotifyBanner.astro';
+import NotifyBannerScript from '@components/NotifyBannerScript.astro';
 
 const socialLinks: { name: string; userId: string; url?: string; iconClass: string }[] = [
   { name: 'GitHub', userId: 'siro3tsu', url: 'https://github.com/siro3tsu/', iconClass: 'icon-[simple-icons--github]' },
@@ -94,6 +95,7 @@ const socialLinks: { name: string; userId: string; url?: string; iconClass: stri
           ></span></a
         >
       </NotifyBanner>
+      <NotifyBannerScript />
       <p>Webプログラミングが趣味の日本の高校生です。</p>
       <p>現在はフロントエンドが得意ですが、バックエンドも習得していきたいです。</p>
       <p>モットーは「無いものは自分でつくる」です。</p>

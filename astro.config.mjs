@@ -30,6 +30,12 @@ export default defineConfig({
     partytown({
       config: {
         forward: ['dataLayer.push'],
+        resolveUrl(url, location, type) {
+          if (type === 'script' && url.href === 'https://scripts.simpleanalyticscdn.com/latest.js') {
+            return new URL('/api/partytown-proxy/latest.js', location.origin);
+          }
+          return url;
+        },
       },
     }),
   ],

@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'; frame-src https://blog.siro.3tsu.dev/; frame-ancestors https://blog.siro.3tsu.dev/
+  Content-Security-Policy: default-src 'none'; img-src 'self' data: https://queue.simpleanalyticscdn.com/; script-src 'self' 'unsafe-inline' https://scripts.simpleanalyticscdn.com/; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; connect-src 'self'; frame-src https://blog.siro.3tsu.dev/; frame-ancestors https://blog.siro.3tsu.dev/; worker-src 'self'
   Cross-Origin-Resource-Policy: same-origin
   Cross-Origin-Opener-Policy: same-origin
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload

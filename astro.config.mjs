@@ -7,8 +7,6 @@ import sitemap from '@astrojs/sitemap';
 
 import { sitemapFilter } from '@core/sitemap';
 
-import partytown from '@astrojs/partytown';
-
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.baseUrl,
@@ -26,17 +24,6 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: sitemapFilter,
-    }),
-    partytown({
-      config: {
-        forward: ['dataLayer.push'],
-        resolveUrl(url, location, type) {
-          if (type === 'script' && url.href === 'https://scripts.simpleanalyticscdn.com/latest.js') {
-            return new URL('/api/partytown-proxy/latest.js', location.origin);
-          }
-          return url;
-        },
-      },
     }),
   ],
 });

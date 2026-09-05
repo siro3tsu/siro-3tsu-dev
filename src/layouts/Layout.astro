@@ -8,6 +8,7 @@ type Props = {
 };
 import { ClientRouter } from 'astro:transitions';
 import { Font } from 'astro:assets';
+import { SimpleAnalytics } from 'astro-simpleanalytics-plugin';
 import { siteConfig } from '@site.config';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
@@ -75,5 +76,6 @@ const titleTemplate =
       <slot />
     </main>
     <Footer />
+    <SimpleAnalytics partytown={true} strictUTMs={true} />
   </body>
 </html>

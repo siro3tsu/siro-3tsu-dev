@@ -7,6 +7,8 @@ import sitemap from '@astrojs/sitemap';
 
 import { sitemapFilter } from '@core/sitemap';
 
+import partytown from '@astrojs/partytown';
+
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.baseUrl,
@@ -24,6 +26,11 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: sitemapFilter,
+    }),
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      },
     }),
   ],
 });
